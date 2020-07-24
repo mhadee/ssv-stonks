@@ -12,8 +12,9 @@
 ## Missing stuff;
   - Other events - this is pretty straight-forward. The plan would be to fetch events with background jobs every X mins and display above
   
- 
-### How would you deploy the above on AWS?
+## Questions 
+
+##### How would you deploy the above on AWS?
   Would need to install the following;
     * Rails
     * Nginx
@@ -21,7 +22,7 @@
    Redis is to run background jobs using sidekiq. Herokus free reddis isn't any good for it.
     
 
-### Where do you see bottlenecks in your proposed architecture and how would you approach scaling this app starting from 100 reqs/day to 900MM reqs/day over 6 months?
+##### Where do you see bottlenecks in your proposed architecture and how would you approach scaling this app starting from 100 reqs/day to 900MM reqs/day over 6 months?
   No bottlenecks for low traffic. 
   To do 900MM reqs/day we would need the following steps and considerations among others;
     * Configure nginx to serve different app instances deployed on various servers as required
@@ -36,9 +37,9 @@
     * Query optimisation
     
     
-### Total number of events received by each streamer
+##### Total number of events received by each streamer
 `SELECT COUNT(*) AS count_all, streamer_name AS event_streamer_name FROM events GROUP_BY streamer_name`
 
-### Count of events by event_type and streamer name
+##### Count of events by event_type and streamer name
 `SELECT COUNT(*) AS count_all, event_type AS events_event_type, streamer_name AS events_streamer_name FROM events GROUP_BY event_type, streamer_name`
  
