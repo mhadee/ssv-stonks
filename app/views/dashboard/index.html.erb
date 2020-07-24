@@ -1,0 +1,67 @@
+<div class="columns">
+  <div class="column is-two-thirds">
+    <div id="twitch-embed"></div>
+  </div>
+  <div class="column">
+    <h3 class="title is-4"></h3>
+    <div id="events">
+      <%@events.each do |event|%>
+        <div class="card mb-2">
+          <header class="card-header">
+            <p class="card-header-title has-text-centered">
+              <%=event.viewer_name%> <%=event.event_type%> <%=event.streamer_name%>
+            </p>
+          </header>
+        </div>
+      <%end%>
+    </div>
+    
+  </div>
+</div>
+
+<div class="modal get-streamer-modal modal_custom">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <div class="card-body">
+        <h5 class="has-text-centered subtitle is-5">Set your favourite streamer</h5>
+        <form class="save-fav-streamer-form" action="/save_fav_streamer" method="post" data-remote="remote">
+          <div class="control">
+            <input class="input streamer-name" type="text" placeholder="Streamer's twitch name" name="name">
+          </div>
+          <div class="control mt-3 has-text-right">
+            <button class="button is-link">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<script>
+  var player;
+  haveFavStreamer = <%=raw current_user.fav_streamer_name.present?%>
+  $(function(){
+    if(haveFavStreamer){
+      getStream("<%=current_user.fav_streamer_name%>");
+    }else{
+      $(".get-streamer-modal").addClass("is-active");
+    }
+    jQuery(document).on("ajax:success",".save-fav-streamer-form", function(){
+      if(player !== undefined){
+        player.destroy();
+      }
+      $(".get-streamer-modal").removeClass("is-active");
+      getStream($(".streamer-name").val());
+    });
+  });
+  function getStream(name){
+    player = new Twitch.Embed("twitch-embed", {
+      width: 854,
+      height: 480,
+      channel: name
+    });
+  }
+</script>
