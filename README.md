@@ -19,7 +19,8 @@
     
 
 #### Where do you see bottlenecks in your proposed architecture and how would you approach scaling this app starting from 100 reqs/day to 900MM reqs/day over 6 months?
-  No bottlenecks for low traffic. 
+  The free server is the bottleneck. With a decent server and low traffic this will run smoothly.
+  
   To do 900MM reqs/day we would need the following steps and considerations among others;
     * Configure nginx to serve different app instances deployed on various servers as required
     * Create standalone service for any function we can seperate if needed
