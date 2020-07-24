@@ -8,10 +8,6 @@
   * Session management. Session expires after 7 days
 
 
-
-## Missing stuff
-  - Other events - this is pretty straight-forward. The plan would be to fetch events with background jobs every X mins and display above
-  
 ## Questions 
 
 #### How would you deploy the above on AWS?
@@ -43,3 +39,6 @@
 #### Count of events by event_type and streamer name
 `SELECT COUNT(*) AS count_all, event_type AS events_event_type, streamer_name AS events_streamer_name FROM events GROUP_BY event_type, streamer_name`
  
+## Missing stuff
+  - Other events; this is pretty straight-forward. The plan would be to fetch events with background jobs every X mins and display above - not pursued due to time constraints and heroku free tier redis issue
+  
