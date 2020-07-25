@@ -12,6 +12,7 @@
 
 #### How would you deploy the above on AWS?
   Would need to install the following
+    
     * Rails
     * Nginx
     * Redis  
@@ -22,6 +23,7 @@
   The free server is the bottleneck. With a decent server and low traffic this will run smoothly.
   
   To do 900MM reqs/day we would need the following steps and considerations among others
+    
     * Configure nginx to serve different app instances deployed on various servers as required
     * Create standalone service for any function we can seperate if needed
     * Seperate the database to a seperate server
